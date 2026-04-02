@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin - Add Product</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
+body{
+background:#f5f5f5;
+font-family:Poppins;
+}
+
+.admin-container{
+max-width:600px;
+margin:50px auto;
+background:white;
+padding:30px;
+border-radius:16px;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+.admin-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:10px;
+}
+
+.nav-buttons{
+display:flex;
+gap:10px;
+}
+
+.nav-btn{
+padding:8px 14px;
+background:#222;
+color:white;
+border-radius:8px;
+text-decoration:none;
+font-size:14px;
+}
+
+.admin-container input,
+.admin-container select,
+.admin-container textarea{
+padding:12px;
+border:1px solid #ddd;
+border-radius:10px;
+font-family:Poppins;
+}
+
+.admin-container textarea{
+height:120px;
+resize:none;
+}
+
+.admin-container button{
+padding:14px;
+background:black;
+color:white;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="admin-container">
+
+<div class="admin-header">
+<h2>Add New Product</h2>
+
+<div class="nav-buttons">
+<a href="manage-products.html" class="nav-btn">
+Manage Products
+</a>
+
+<a href="manage-orders.html" class="nav-btn">
+Manage Orders
+</a>
+</div>
+
+</div>
+
+<input type="text" id="productName" placeholder="Product Name">
+
+<input type="number" id="productPrice" placeholder="Price">
+
+<textarea id="productDescription" placeholder="Product Description"></textarea>
+
+<input type="file" id="productImage" accept="image/*">
+
+<select id="productCategory">
+<option value="">Select Category</option>
+<option value="neckchain">Anti Tarnish Neckchains</option>
+<option value="earring">Anti Tarnish Earrings</option>
+<option value="kada-bracelet">Anti Tarnish Kada Bracelets</option>
+<option value="chain-bracelet">Anti Tarnish Chain Bracelets</option>
+<option value="ring">Anti Tarnish Rings</option>
+</select>
+
+<label>
+<input type="checkbox" id="isTrending">
+Mark as Trending
+</label>
+
+<button onclick="addProduct()">Add Product</button>
+
+</div>
+
+<script type="module">
+
+import { auth } from "../js/firebase.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const ADMIN_EMAIL = "admineloura@gmail.com";
+
+onAuthStateChanged(auth, (user) => {
+
+if (!user) {
+window.location.href = "../login.html";
+return;
+}
+
+if (user.email.toLowerCase() !== ADMIN_EMAIL.toLowerCase()) {
+window.location.href = "../index.html";
+}
+
+});
+
+const SUPABASE_URL = "https://thgveowwxdjcvisofske.supabase.co";
+const SUPABASE_KEY = "sb_publishable_JN8qHQVTWOLNtRzsTLHT1g_AMKIzfMm";
+
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+async function addProduct(){
+
+const name = document.getElementById("productName").value.trim();
+const price = document.getElementById("productPrice").value;
+const description = document.getElementById("productDescription").value.trim();
+const file = document.getElementById("productImage").files[0];
+const category = document.getElementById("productCategory").value;
+const isTrending = document.getElementById("isTrending").checked;
+
+if(!name || !price || !file || !category){
+alert("All fields required");
+return;
+}
+
+const fileName = Date.now() + "-" + file.name.replace(/\s+/g,"-");
+
+const { error: uploadError } = await supabase.storage
+.from("product-images")
+.upload(fileName, file);
+
+if(uploadError){
+console.error(uploadError);
+alert("Image upload failed");
+return;
+}
+
+const { error: insertError } = await supabase
+.from("products")
+.insert([{
+name,
+price: Number(price),
+description,
+image_path: fileName,
+category,
+is_trending: isTrending
+}]);
+
+if(insertError){
+console.error(insertError);
+alert("Insert failed");
+return;
+}
+
+alert("Product Added Successfully ✅");
+
+location.reload();
+
+}
+
+window.addProduct = addProduct;
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin - Orders</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
+body{
+font-family:Poppins;
+background:#f5f5f5;
+}
+
+.container{
+max-width:900px;
+margin:40px auto;
+}
+
+.order-card{
+background:white;
+padding:20px;
+border-radius:12px;
+margin-bottom:15px;
+box-shadow:0 5px 20px rgba(0,0,0,0.05);
+}
+
+.status-select{
+padding:6px 10px;
+border-radius:6px;
+border:1px solid #ddd;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Manage Orders</h2>
+
+<div id="ordersList"></div>
+
+</div>
+
+<script>
+
+const SUPABASE_URL="https://thgveowwxdjcvisofske.supabase.co";
+const SUPABASE_KEY="sb_publishable_JN8qHQVTWOLNtRzsTLHT1g_AMKIzfMm";
+
+const supabase=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+
+async function loadOrders(){
+
+const {data,error}=await supabase
+.from("orders")
+.select("*")
+.order("created_at",{ascending:false});
+
+const container=document.getElementById("ordersList");
+
+container.innerHTML="";
+
+data.forEach(order=>{
+
+container.innerHTML+=`
+
+<div class="order-card">
+
+<p><b>Order ID:</b> ${order.id}</p>
+<p><b>Customer:</b> ${order.user_email}</p>
+<p><b>Total:</b> ₹${order.total}</p>
+
+<select class="status-select"
+onchange="updateStatus('${order.id}',this.value)">
+
+<option ${order.status=="Getting Ready"?"selected":""}>
+Getting Ready
+</option>
+
+<option ${order.status=="Shipped"?"selected":""}>
+Shipped
+</option>
+
+<option ${order.status=="Out for Delivery"?"selected":""}>
+Out for Delivery
+</option>
+
+<option ${order.status=="Delivered"?"selected":""}>
+Delivered
+</option>
+
+</select>
+
+</div>
+
+`;
+
+});
+
+}
+
+async function updateStatus(id,status){
+
+await supabase
+.from("orders")
+.update({status})
+.eq("id",id);
+
+alert("Order Updated");
+
+}
+
+loadOrders();
+
+</script>
+
+</body>
+</html>

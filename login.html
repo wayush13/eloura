@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Eloura | Login</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="login-page">
+
+<div class="login-card">
+
+<h2>Welcome Back</h2>
+<p>Login to continue shopping</p>
+
+<input type="email" id="email" placeholder="Email Address">
+
+<div style="position:relative;">
+<input type="password" id="password" placeholder="Password" style="width:100%;">
+<span onclick="togglePassword()" 
+style="position:absolute; right:10px; top:50%; transform:translateY(-50%); cursor:pointer;">
+👁️
+</span>
+</div>
+
+<!-- 🔥 IMPORTANT: NO onclick -->
+<button class="login-btn" id="loginBtn">Login</button>
+
+<div class="login-switch">
+Don't have an account? 
+<span id="registerBtn">Create one</span>
+</div>
+
+</div>
+
+</div>
+
+<!-- ORDER MATTERS -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script type="module" src="js/script.js"></script>
+<script type="module" src="js/login.js"></script>
+
+<script>
+function togglePassword(){
+const input = document.getElementById("password");
+input.type = input.type === "password" ? "text" : "password";
+}
+</script>
+
+</body>
+</html>

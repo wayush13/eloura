@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Eloura</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet"> 
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<!-- Announcement Bar -->
+<div class="announcement">
+⚡ FREE Gift on orders above ₹999
+</div>
+
+<!-- Header -->
+<header class="header">
+<div class="menu">☰</div>
+
+<div class="logo">
+    <span class="logo-main">ELOURA</span>
+    <span class="logo-tag">WEAR YOUR AURA</span>
+</div>
+
+<div id="navActions" class="icons"></div>
+</header>
+
+<!-- Search -->
+<section class="search-box">
+<input type="text" id="searchInput" placeholder="Search jewellery, rings, earrings...">
+</section>
+
+<!-- Categories Scroll -->
+<section class="categories">
+<span>New</span>
+<span>Best Seller</span>
+<span>Rings</span>
+<span>Neckchains</span>
+<span>Earrings</span>
+<span>Kada Bracelets</span>
+<span>Chain Bracelets</span>
+</section>
+
+<!-- Hero Section -->
+<section class="hero">
+<h1>Elegance Crafted For Everyday Shine</h1>
+<p>Minimal jewellery designed for modern lifestyle.</p>
+<button onclick="scrollToProducts()">Shop Collection</button>
+</section>
+
+<!-- TRENDING -->
+<section class="section">
+<div class="section-header">
+<h2 class="section-title">Trending Now</h2>
+<span class="view-all" data-type="trending">View All →</span>
+</div>
+
+<div id="trendingSection" class="horizontal-scroll">
+<p style="padding:10px; font-size:13px;">Loading products...</p>
+</div>
+
+</section>
+
+<!-- NECKCHAINS -->
+<section class="products">
+<div class="section-header">
+<h2>Anti Tarnish Neckchains</h2>
+<span class="view-all" data-type="neckchain">View All →</span>
+</div>
+<div id="neckchainSection" class="product-grid"></div>
+</section>
+
+<!-- EARRINGS -->
+<section class="products">
+<div class="section-header">
+<h2>Anti Tarnish Earrings</h2>
+<span class="view-all" data-type="earring">View All →</span>
+</div>
+<div id="earringSection" class="product-grid"></div>
+</section>
+
+<!-- KADA BRACELETS -->
+<section class="products">
+<div class="section-header">
+<h2>Anti Tarnish Kada Bracelets</h2>
+<span class="view-all" data-type="kada-bracelet">View All →</span>
+</div>
+<div id="kadaBraceletSection" class="product-grid"></div>
+</section>
+
+<!-- CHAIN BRACELETS -->
+<section class="products">
+<div class="section-header">
+<h2>Anti Tarnish Chain Bracelets</h2>
+<span class="view-all" data-type="chain-bracelet">View All →</span>
+</div>
+<div id="chainBraceletSection" class="product-grid"></div>
+</section>
+
+<!-- RINGS -->
+<section class="products">
+<div class="section-header">
+<h2>Anti Tarnish Rings</h2>
+<span class="view-all" data-type="ring">View All →</span>
+</div>
+<div id="ringSection" class="product-grid"></div>
+</section>
+
+<!-- TRUST SECTION -->
+<section class="trust-section">
+<h2>Why Choose Eloura</h2>
+
+<div class="trust-grid">
+<div class="trust-item">
+<div class="trust-icon">✨</div>
+<p>Anti-Tarnish Coating</p>
+</div>
+
+<div class="trust-item">
+<div class="trust-icon">💧</div>
+<p>Waterproof Jewellery</p>
+</div>
+
+<div class="trust-item">
+<div class="trust-icon">🔁</div>
+<p>Easy Returns</p>
+</div>
+
+<div class="trust-item">
+<div class="trust-icon">🛡️</div>
+<p>Premium Quality Finish</p>
+</div>
+</div>
+</section>
+
+<!-- Brand Story -->
+<section class="brand-story">
+<h2>More Than Jewellery. It's Energy.</h2>
+<p>
+At Eloura, every piece is crafted to enhance your aura. 
+Our designs blend elegance with durability, giving you jewellery 
+that shines with you every single day.
+</p>
+</section>
+
+<!-- Reviews -->
+<section class="reviews">
+<h2>What Our Customers Say</h2>
+
+<div class="review-card">
+<p>⭐⭐⭐⭐⭐</p>
+<p>"Absolutely love the quality. It hasn’t tarnished at all!"</p>
+<span>- Priya M.</span>
+</div>
+
+<div class="review-card">
+<p>⭐⭐⭐⭐⭐</p>
+<p>"Looks premium and feels lightweight. Perfect for daily wear."</p>
+<span>- Riya S.</span>
+</div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+<h3 class="logo-main">ELOURA</h3>
+<p class="logo-tag">Wear Your Aura</p>
+
+<div class="footer-links">
+<span>Contact Us</span>
+<span>Privacy Policy</span>
+<span>Return Policy</span>
+</div>
+
+<p class="copyright">
+© 2026 Eloura. All Rights Reserved.
+</p>
+</footer>
+
+<!-- Bottom Navigation -->
+<div class="bottom-nav">
+<div>🏠</div>
+<div>🔍</div>
+<div onclick="goToCart()">🛒</div>
+<div>👤</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script type="module" src="js/script.js"></script>
+
+</body>
+</html>

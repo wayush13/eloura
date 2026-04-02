@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product - Eloura</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+<header class="header">
+<div class="menu">☰</div>
+<div class="logo">
+<span class="logo-main">ELOURA</span>
+<span class="logo-tag">WEAR YOUR AURA</span>
+</div>
+<div class="icons">
+<span onclick="history.back()">← Back</span>
+</div>
+</header>
+
+<section class="product-detail">
+
+<div class="product-image">
+<img id="detailImage">
+</div>
+
+<div class="product-content">
+
+<h2 id="detailName"></h2>
+<p id="detailPrice"></p>
+<p id="detailDescription"></p>
+
+<input type="number" id="qty" value="1" min="1">
+
+<div class="product-buttons">
+<button id="addToCartBtn">Add to Cart</button>
+<button id="whatsappBtn">Order on WhatsApp</button>
+</div>
+
+</div>
+</section>
+
+<script type="module" src="js/script.js"></script>
+<script src="js/productPage.js"></script>
+
+</body>
+</html>

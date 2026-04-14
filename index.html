@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Eloura</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet"> 
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<!-- Announcement -->
+<div class="announcement">
+⚡ FREE Gift on orders above ₹999
+</div>
+
+<!-- Header -->
+<header class="header">
+
+<div class="menu">☰</div>
+
+<div class="logo">
+<span class="logo-main">ELOURA</span>
+<span class="logo-tag">WEAR YOUR AURA</span>
+</div>
+
+<div id="navActions" class="icons"></div>
+
+</header>
+
+
+<!-- Search -->
+<section class="search-box">
+<input type="text" id="searchInput" placeholder="Search jewellery, rings, earrings...">
+</section>
+
+<!-- SEARCH RESULTS -->
+<section id="searchResults" class="products"></section>
+
+
+<!-- Categories -->
+<section class="categories">
+<span onclick="scrollToSection('necklace')">Necklace</span>
+<span onclick="scrollToSection('earrings')">Earrings</span>
+<span onclick="scrollToSection('bracelets')">Bracelets</span>
+<span onclick="scrollToSection('kada')">Kada</span>
+<span onclick="scrollToSection('rings')">Rings</span>
+<span onclick="scrollToSection('sets')">Sets</span>
+<span onclick="scrollToSection('watches')">Watches</span>
+<span onclick="scrollToSection('bestseller')">Bestseller</span>
+<span onclick="scrollToSection('mens')">Men’s Collection</span>
+<span onclick="scrollToSection('box')">Jewellery Box</span>
+</section>
+
+
+<!-- Hero -->
+<section class="hero">
+<h1>Elegance Crafted For Everyday Shine</h1>
+<p>Minimal jewellery designed for modern lifestyle.</p>
+<button onclick="scrollToSection('trending')">Shop Collection</button>
+</section>
+
+
+<!-- TRENDING -->
+<section class="section" id="trending">
+
+<div class="section-header">
+<h2 class="section-title">Trending Now</h2>
+<span class="view-all" data-type="trending">View All →</span>
+</div>
+
+<div id="trendingSection" class="horizontal-scroll"></div>
+
+</section>
+
+
+<!-- NECKLACE -->
+<section class="products" id="necklace">
+<div class="section-header">
+<h2>Necklace</h2>
+<span class="view-all" data-type="necklace">View All →</span>
+</div>
+<div id="necklaceSection" class="product-grid"></div>
+</section>
+
+
+<!-- EARRINGS -->
+<section class="products" id="earrings">
+<div class="section-header">
+<h2>Earrings</h2>
+<span class="view-all" data-type="earrings">View All →</span>
+</div>
+<div id="earringsSection" class="product-grid"></div>
+</section>
+
+
+<!-- BRACELETS -->
+<section class="products" id="bracelets">
+<div class="section-header">
+<h2>Bracelets</h2>
+<span class="view-all" data-type="bracelets">View All →</span>
+</div>
+<div id="braceletsSection" class="product-grid"></div>
+</section>
+
+
+<!-- KADA -->
+<section class="products" id="kada">
+<div class="section-header">
+<h2>Kada</h2>
+<span class="view-all" data-type="kada">View All →</span>
+</div>
+<div id="kadaSection" class="product-grid"></div>
+</section>
+
+
+<!-- RINGS -->
+<section class="products" id="rings">
+<div class="section-header">
+<h2>Rings</h2>
+<span class="view-all" data-type="rings">View All →</span>
+</div>
+<div id="ringsSection" class="product-grid"></div>
+</section>
+
+
+<!-- SETS -->
+<section class="products" id="sets">
+<div class="section-header">
+<h2>Sets</h2>
+<span class="view-all" data-type="sets">View All →</span>
+</div>
+<div id="setsSection" class="product-grid"></div>
+</section>
+
+
+<!-- WATCHES -->
+<section class="products" id="watches">
+<div class="section-header">
+<h2>Watches</h2>
+<span class="view-all" data-type="watches">View All →</span>
+</div>
+<div id="watchesSection" class="product-grid"></div>
+</section>
+
+
+<!-- BESTSELLER -->
+<section class="products" id="bestseller">
+<div class="section-header">
+<h2>Bestseller</h2>
+<span class="view-all" data-type="bestseller">View All →</span>
+</div>
+<div id="bestsellerSection" class="product-grid"></div>
+</section>
+
+
+<!-- MEN -->
+<section class="products" id="mens">
+<div class="section-header">
+<h2>Men's Collection</h2>
+<span class="view-all" data-type="mens">View All →</span>
+</div>
+<div id="mensSection" class="product-grid"></div>
+</section>
+
+
+<!-- BOX -->
+<section class="products" id="box">
+<div class="section-header">
+<h2>Jewellery Box</h2>
+<span class="view-all" data-type="box">View All →</span>
+</div>
+<div id="boxSection" class="product-grid"></div>
+</section>
+
+
+<!-- Footer -->
+<footer class="footer">
+
+<h3 class="logo-main">ELOURA</h3>
+<p class="logo-tag">Wear Your Aura</p>
+
+<div class="footer-links">
+<span>Contact Us</span>
+<span>Privacy Policy</span>
+
+<a href="https://instagram.com/eloura_jewels_" target="_blank">
+<i class="fa-brands fa-instagram"></i>
+Instagram
+</a>
+
+</div>
+
+<p>© 2026 Eloura. All Rights Reserved.</p>
+
+</footer>
+
+
+<script>
+
+function scrollToSection(section){
+document.getElementById(section).scrollIntoView({
+behavior:"smooth"
+})
+}
+
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script type="module" src="js/script.js"></script>
+
+<!-- SEARCH FILE -->
+<script type="module" src="js/search.js"></script>
+
+</body>
+</html>

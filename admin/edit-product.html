@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Edit Product</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
+.admin-container{
+max-width:600px;
+margin:50px auto;
+background:white;
+padding:30px;
+border-radius:16px;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+.admin-container input,
+.admin-container textarea,
+.admin-container select{
+padding:12px;
+border:1px solid #ddd;
+border-radius:10px;
+font-family:Poppins;
+}
+
+.admin-container textarea{
+height:120px;
+resize:none;
+}
+
+.admin-container button{
+padding:14px;
+background:black;
+color:white;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="admin-container">
+
+<h2>Edit Product</h2>
+
+<input type="text" id="productName" placeholder="Product Name">
+
+<input type="number" id="productPrice" placeholder="Price">
+
+<textarea id="productDescription" placeholder="Product Description"></textarea>
+
+<select id="productCategory">
+
+<option value="necklace">Necklace</option>
+<option value="earrings">Earrings</option>
+<option value="bracelets">Bracelets</option>
+<option value="kada">Kada</option>
+<option value="rings">Rings</option>
+<option value="sets">Sets</option>
+<option value="watches">Watches</option>
+<option value="bestseller">Bestseller</option>
+<option value="mens-collection">Men's Collection</option>
+<option value="jewellery-box">Jewellery Box</option>
+
+</select>
+
+<button onclick="updateProduct()">Update Product</button>
+
+</div>
+
+<script type="module">
+
+const SUPABASE_URL = "https://thgveowwxdjcvisofske.supabase.co";
+const SUPABASE_KEY = "sb_publishable_JN8qHQVTWOLNtRzsTLHT1g_AMKIzfMm";
+
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+const params = new URLSearchParams(window.location.search);
+const productId = params.get("id");
+
+async function loadProduct(){
+
+const { data, error } = await supabase
+.from("products")
+.select("*")
+.eq("id", productId)
+.single();
+
+if(error){
+console.error(error);
+return;
+}
+
+document.getElementById("productName").value = data.name;
+document.getElementById("productPrice").value = data.price;
+document.getElementById("productDescription").value = data.description;
+document.getElementById("productCategory").value = data.category;
+
+}
+
+async function updateProduct(){
+
+const name = document.getElementById("productName").value;
+const price = document.getElementById("productPrice").value;
+const description = document.getElementById("productDescription").value;
+const category = document.getElementById("productCategory").value;
+
+const { error } = await supabase
+.from("products")
+.update({
+name,
+price,
+description,
+category
+})
+.eq("id", productId);
+
+if(error){
+console.error(error);
+alert("Update failed");
+return;
+}
+
+alert("Product updated successfully ✅");
+
+window.location.href="manage-products.html";
+
+}
+
+window.updateProduct = updateProduct;
+
+loadProduct();
+
+</script>
+
+</body>
+</html>

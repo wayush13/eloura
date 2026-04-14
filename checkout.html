@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Checkout</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<div class="checkout-container">
+
+<h2 class="section-title checkout-title">Checkout</h2>
+
+<form class="checkout-form" onsubmit="sendWhatsAppOrder(event)">
+
+<input type="text" id="name" placeholder="Full Name" required>
+
+<input type="tel" id="phone" placeholder="Phone Number" required>
+
+<textarea id="address" placeholder="Full Address" required></textarea>
+
+<input type="text" id="city" placeholder="City" required>
+
+<input type="text" id="pincode" placeholder="Pincode" required>
+
+<button type="submit" class="checkout-btn">
+Order on WhatsApp
+</button>
+
+</form>
+
+</div>
+
+<script>
+
+function getCart(){
+return JSON.parse(localStorage.getItem("cart")) || [];
+}
+
+function sendWhatsAppOrder(e){
+
+e.preventDefault();
+
+let name = document.getElementById("name").value;
+let phone = document.getElementById("phone").value;
+let address = document.getElementById("address").value;
+let city = document.getElementById("city").value;
+let pincode = document.getElementById("pincode").value;
+
+let cart = getCart();
+
+let total = 0;
+
+let message = "🛍 *New Order - Eloura* %0A%0A";
+
+cart.forEach(item=>{
+total += item.price * item.quantity;
+message += `${item.name} x ${item.quantity} - ₹${item.price * item.quantity}%0A`;
+});
+
+message += "%0A--------------------";
+message += "%0A💰 Total: ₹" + total;
+
+message += "%0A%0A👤 Name: " + name;
+message += "%0A📞 Phone: " + phone;
+message += "%0A📍 Address: " + address;
+message += "%0A🏙 City: " + city;
+message += "%0A📮 Pincode: " + pincode;
+
+let whatsappNumber = "919136334964";
+
+let url = `https://wa.me/${whatsappNumber}?text=${message}`;
+
+window.open(url, "_blank");
+
+}
+
+</script>
+
+</body>
+
+</html>

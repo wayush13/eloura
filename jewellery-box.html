@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Jewellery Box | Eloura</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+</head>
+
+<body>
+
+<!-- Header -->
+<header class="collection-header">
+
+<a href="index.html" class="back-btn">
+← Back to Home
+</a>
+
+<h1>Jewellery Box</h1>
+
+</header>
+
+
+<!-- Products Section -->
+
+<section class="collection-section">
+
+<div class="collection-grid" id="boxProducts">
+
+<p style="text-align:center; grid-column:1/-1;">
+Loading Products...
+</p>
+
+</div>
+
+</section>
+
+
+
+<script>
+
+// ================= SUPABASE =================
+
+const SUPABASE_URL = "https://thgveowwxdjcvisofske.supabase.co";
+const SUPABASE_KEY = "sb_publishable_JN8qHQVTWOLNtRzsTLHT1g_AMKIzfMm";
+
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+
+// ================= LOAD BOX =================
+
+async function loadBox() {
+
+const { data, error } = await supabaseClient
+.from("products")
+.select("*")
+.eq("category", "box")
+.order("id", { ascending: false });
+
+
+const container = document.getElementById("boxProducts");
+
+container.innerHTML = "";
+
+
+if(error){
+console.error(error);
+container.innerHTML = "Error loading products";
+return;
+}
+
+
+if(!data || data.length === 0){
+
+container.innerHTML = `
+<p style="text-align:center; grid-column:1/-1;">
+No Jewellery Box Products Found
+</p>
+`;
+
+return;
+
+}
+
+
+data.forEach(product => {
+
+const { data: image } = supabaseClient
+.storage
+.from("product-images")
+.getPublicUrl(product.image_path);
+
+
+container.innerHTML += `
+
+<div class="product-card">
+
+<img src="${image.publicUrl}" alt="${product.name}" />
+
+<h3>${product.name}</h3>
+
+<p class="price">₹${product.price}</p>
+
+<a href="product.html?id=${product.id}" class="view-btn">
+View Product
+</a>
+
+</div>
+
+`;
+
+});
+
+}
+
+loadBox();
+
+</script>
+
+
+</body>
+
+</html>

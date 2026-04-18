@@ -101,9 +101,14 @@ const wishlist=getWishlist();
 const isWishlisted=wishlist.includes(product.id);
 const imageUrl=getImageUrl(product.image_path);
 
+// ✅ STOCK CHECK
+const isOut = product.in_stock === false;
+
 return `
 
-<div class="product-card" data-id="${product.id}">
+<div class="product-card" data-id="${product.id}" style="position:relative;">
+
+${isOut ? `<div class="out-badge">Out of Stock</div>` : ""}
 
 <div class="wishlist ${isWishlisted ? "active" : ""}"
 onclick="event.stopPropagation(); toggleWishlist('${product.id}', this)">
@@ -116,6 +121,13 @@ onclick="event.stopPropagation(); toggleWishlist('${product.id}', this)">
 <div class="product-name">${product.name}</div>
 <div class="product-price">₹${product.price}</div>
 </div>
+
+<button 
+  ${isOut ? "disabled" : ""} 
+  style="${isOut ? "background:#ccc;cursor:not-allowed;" : ""}"
+>
+  ${isOut ? "Out of Stock" : "Add to Cart"}
+</button>
 
 </div>
 `;
@@ -232,6 +244,8 @@ await loadCategorySection("setsSection","sets");
 await loadCategorySection("watchesSection","watches");
 await loadCategorySection("bestsellerSection","bestseller");
 await loadCategorySection("mensSection","mens-collection");
-await loadCategorySection("jewelleryBoxSection","jewellery-box");
+
+// ✅ FIXED ID
+await loadCategorySection("boxSection","jewellery-box");
 
 });

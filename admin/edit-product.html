@@ -66,7 +66,6 @@ cursor:pointer;
 <textarea id="productDescription" placeholder="Product Description"></textarea>
 
 <select id="productCategory">
-
 <option value="necklace">Necklace</option>
 <option value="earrings">Earrings</option>
 <option value="bracelets">Bracelets</option>
@@ -77,7 +76,12 @@ cursor:pointer;
 <option value="bestseller">Bestseller</option>
 <option value="mens-collection">Men's Collection</option>
 <option value="jewellery-box">Jewellery Box</option>
+</select>
 
+<!-- ✅ NEW STOCK SELECT -->
+<select id="productStock">
+  <option value="true">In Stock</option>
+  <option value="false">Out of Stock</option>
 </select>
 
 <button onclick="updateProduct()">Update Product</button>
@@ -107,10 +111,15 @@ console.error(error);
 return;
 }
 
+// Fill form
 document.getElementById("productName").value = data.name;
 document.getElementById("productPrice").value = data.price;
 document.getElementById("productDescription").value = data.description;
 document.getElementById("productCategory").value = data.category;
+
+// ✅ HANDLE OLD PRODUCTS SAFELY
+document.getElementById("productStock").value = 
+  (data.in_stock === false ? "false" : "true");
 
 }
 
@@ -120,20 +129,22 @@ const name = document.getElementById("productName").value;
 const price = document.getElementById("productPrice").value;
 const description = document.getElementById("productDescription").value;
 const category = document.getElementById("productCategory").value;
+const stock = document.getElementById("productStock").value === "true";
 
 const { error } = await supabase
 .from("products")
 .update({
-name,
-price,
-description,
-category
+  name,
+  price,
+  description,
+  category,
+  in_stock: stock   // ✅ NEW FIELD
 })
 .eq("id", productId);
 
 if(error){
 console.error(error);
-alert("Update failed");
+alert("Update failed ❌");
 return;
 }
 

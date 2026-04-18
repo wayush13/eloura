@@ -1774,3 +1774,35 @@ font-size: 13px;
 }
 
 }
+/* ================= OUT OF STOCK BADGE ================= */
+
+.product-card{
+  position: relative;
+}
+
+/* 🔴 Badge */
+.out-badge{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: linear-gradient(135deg, #ff4d4d, #cc0000);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  z-index: 10;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* ❌ Disabled Button */
+.product-card button:disabled{
+  background: #ccc !important;
+  cursor: not-allowed;
+  color: #666;
+}
+
+/* 🖤 Optional: Fade effect for out of stock products */
+.product-card:has(.out-badge){
+  opacity: 0.85;
+}
